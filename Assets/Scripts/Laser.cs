@@ -11,7 +11,6 @@ public class Laser : MonoBehaviour
 	public GameObject target;
 	public float t;
 	AudioSource audio;
-	bool handToggle = true; // true = right, false = left;
 	//int score ;
 	//ParticleSystem ps;
 	//bool flag;
@@ -50,24 +49,23 @@ public class Laser : MonoBehaviour
 		Frame frame = controller.Frame(); // controller is a Controller object
 		if(frame.Hands.Count > 0){
 			List<Hand> hands = frame.Hands;
-			Hand hand = hands [0];
-			if (hands.Count == 1) {
-				if (hand.IsLeft) {
-					handToggle = false;
-				} else {
-					handToggle = true;
-				}
-			} else {
-				handToggle = true;
-			}
-			int extendedFingers = 0;
-			for (int f = 0; f < hand.Fingers.Count; f++) {
-				Finger digit = hand.Fingers [f];
-				if (digit.IsExtended)
-					extendedFingers++;
-			}
+            Hand hand;
+            int extendedFingers = 0;
+            foreach (Hand h in hands)
+            {
+                if (h.IsRight)
+                {
+                    hand = h;
+                    for (int f = 0; f < hand.Fingers.Count; f++)
+                    {
+                        Finger digit = hand.Fingers[f];
+                        if (digit.IsExtended)
+                            extendedFingers++;
+                    }
+                }
+            }
 
-			if (extendedFingers == 5) {
+            if (extendedFingers == 5) {
 				line.enabled = true;
 				Vector3 rayDirection = transform.TransformDirection(Vector3.down);
 				if (Physics.Raycast (transform.position, rayDirection, out hit)) {
