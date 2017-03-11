@@ -67,7 +67,7 @@ public class Laser : MonoBehaviour
 					}
 				} else {
 					t = 0f;
-					line.SetPosition (1, new Vector3 (0,-1000000,0));
+					line.SetPosition (1, new Vector3 (0,-5000000,0));
 				}
 			} else {
 				line.enabled = false;
