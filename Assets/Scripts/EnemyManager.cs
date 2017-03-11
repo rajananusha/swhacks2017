@@ -19,8 +19,8 @@ public class EnemyManager : MonoBehaviour {
 
 		if (GameObject.FindGameObjectsWithTag ("Enemy").Length < 10) {
 
-			enemy = Instantiate (Resources.Load("Prefabs/Asteroid"), position, Quaternion.identity) as GameObject;
-			enemy.name = "Asteroid " + i.ToString();
+			enemy = Instantiate (Resources.Load("Prefabs/Meteor"), position, Quaternion.identity) as GameObject;
+			enemy.name = "Meteor " + i.ToString();
 			i++;
 		}
 	
