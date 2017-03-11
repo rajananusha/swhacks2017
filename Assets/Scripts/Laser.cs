@@ -11,14 +11,15 @@ public class Laser : MonoBehaviour
 	public GameObject target;
 	public float t;
 	AudioSource audio;
-	int score ;
+	//int score ;
 	//ParticleSystem ps;
 	//bool flag;
+
 
 	// Use this for initialization
 	void Start()
 	{
-		score = GameObject.Find ("Managers").GetComponent<ScoreManager> ().score;
+		
 		scoreLabel = GameObject.Find ("Score Text").GetComponent<Text> ();
 		line = gameObject.GetComponent<LineRenderer>();
 		line.enabled = false;
@@ -35,6 +36,7 @@ public class Laser : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		//score = GameObject.Find ("Managers").GetComponent<ScoreManager> ().score;
 
 		if (line.enabled) {
 			t += 0.5f * Time.deltaTime;
@@ -66,10 +68,12 @@ public class Laser : MonoBehaviour
 							//ps = target.GetComponent<ParticleSystem>();
 							//ps.Play();
 							audio.Play ();
-							Destroy (target/*,ps.duration*/);
+							Destroy (target/*, ps.duration*/);
+                            EnemyManager e = new EnemyManager();
+                            e.updateEnemy((Object)target);
+							GameObject.Find ("Managers").GetComponent<ScoreManager> ().score++;
 
-							score++;
-							scoreLabel.text = "SCORE : " + score.ToString();
+							scoreLabel.text = "SCORE : " + GameObject.Find ("Managers").GetComponent<ScoreManager> ().score.ToString();
 							
 						}
 					}
