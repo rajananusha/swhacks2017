@@ -2,19 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using Leap;
+using UnityEngine.UI ;
 
 public class Laser : MonoBehaviour
 {
-
+	Text scoreLabel ;
 	public LineRenderer line;
 	public GameObject target;
 	public float t;
 	AudioSource audio;
-
+	int score ;
 	// Use this for initialization
 	void Start()
 	{
-
+		score = 0;
+		scoreLabel = GameObject.Find ("Score Text").GetComponent<Text> ();
 		line = gameObject.GetComponent<LineRenderer>();
 		line.enabled = false;
 		line.useWorldSpace = false;
@@ -24,6 +26,7 @@ public class Laser : MonoBehaviour
 		t = 0.0f;
 		audio = GameObject.Find ("Managers").GetComponent<AudioSource> ();
 	}
+
 
 	// Update is called once per frame
 	void Update()
@@ -53,13 +56,12 @@ public class Laser : MonoBehaviour
 					if (hit.collider) {
 						t = 0f;
 						target = hit.transform.gameObject;
-						print (target.tag);
-//						print (hit.distance);
 						line.SetPosition (1, new Vector3 (0,-hit.distance,0 ));
 
 						if (target.tag == "Enemy") {
-							print ("hgtrdxtjrgxhjtf");							
 							Destroy (target);
+							score++;
+							scoreLabel.text = "SCORE : " + score.ToString();
 							audio.Play ();
 						}
 					}
