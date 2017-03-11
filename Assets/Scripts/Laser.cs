@@ -11,7 +11,7 @@ public class Laser : MonoBehaviour
 	public GameObject target;
 	public float t;
 	AudioSource audio;
-	int score ;
+	public static int score ;
 	// Use this for initialization
 	void Start()
 	{
@@ -60,7 +60,9 @@ public class Laser : MonoBehaviour
 
 						if (target.tag == "Enemy") {
 							Destroy (target);
-							score++;
+                            EnemyManager e = new EnemyManager();
+                            e.updateEnemy((Object)target);
+                            score++;
 							scoreLabel.text = "SCORE : " + score.ToString();
 							audio.Play ();
 						}
