@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyManager : MonoBehaviour {
 
-
+	//public GameObject AstroExplosion;
 	GameObject enemy;
 	int i;
 	public static ArrayList enemyInfo = new ArrayList();
@@ -46,7 +46,9 @@ public class EnemyManager : MonoBehaviour {
 
     public void updateEnemy(Object target)
     {
-        enemyInfo.Remove(target);
+        
+		enemyInfo.Remove(target);
+
     }
 	
 }

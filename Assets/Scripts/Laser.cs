@@ -11,6 +11,7 @@ public class Laser : MonoBehaviour
 	public GameObject target;
 	public float t;
 	AudioSource audio;
+	bool handToggle = true; // true = right, false = left;
 	//int score ;
 	//ParticleSystem ps;
 	//bool flag;
@@ -24,8 +25,10 @@ public class Laser : MonoBehaviour
 		line = gameObject.GetComponent<LineRenderer>();
 		line.enabled = false;
 		line.useWorldSpace = false;
-		line.SetVertexCount(2);
-		line.SetColors(Color.cyan, Color.cyan);
+		line.SetVertexCount (2);
+		line.material = new Material (Shader.Find ("Particles/Additive"));
+		line.SetColors(Color.yellow, Color.yellow);
+		line.material.color = Color.yellow;
 		line.SetWidth(0.01f, 0.01f);
 		t = 0.0f;
 		audio = GameObject.Find ("Managers").GetComponent<AudioSource> ();
@@ -48,6 +51,15 @@ public class Laser : MonoBehaviour
 		if(frame.Hands.Count > 0){
 			List<Hand> hands = frame.Hands;
 			Hand hand = hands [0];
+			if (hands.Count == 1) {
+				if (hand.IsLeft) {
+					handToggle = false;
+				} else {
+					handToggle = true;
+				}
+			} else {
+				handToggle = true;
+			}
 			int extendedFingers = 0;
 			for (int f = 0; f < hand.Fingers.Count; f++) {
 				Finger digit = hand.Fingers [f];
