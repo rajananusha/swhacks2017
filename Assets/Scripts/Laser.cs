@@ -12,11 +12,13 @@ public class Laser : MonoBehaviour
 	public float t;
 	AudioSource audio;
 	int score ;
-	ParticleSystem ps;
+	//ParticleSystem ps;
+	//bool flag;
+
 	// Use this for initialization
 	void Start()
 	{
-		score = 0;
+		score = GameObject.Find ("Managers").GetComponent<ScoreManager> ().score;
 		scoreLabel = GameObject.Find ("Score Text").GetComponent<Text> ();
 		line = gameObject.GetComponent<LineRenderer>();
 		line.enabled = false;
@@ -26,7 +28,7 @@ public class Laser : MonoBehaviour
 		line.SetWidth(0.01f, 0.01f);
 		t = 0.0f;
 		audio = GameObject.Find ("Managers").GetComponent<AudioSource> ();
-		ps = GetComponent<ParticleSystem>();
+
 	}
 
 
@@ -61,10 +63,11 @@ public class Laser : MonoBehaviour
 						line.SetPosition (1, new Vector3 (0,-hit.distance,0 ));
 
 						if (target.tag == "Enemy") {
-							ps.Play();
-							Destroy(gameObject, ps.duration);
-							Destroy (target);
+							//ps = target.GetComponent<ParticleSystem>();
+							//ps.Play();
 							audio.Play ();
+							Destroy (target/*,ps.duration*/);
+
 							score++;
 							scoreLabel.text = "SCORE : " + score.ToString();
 							

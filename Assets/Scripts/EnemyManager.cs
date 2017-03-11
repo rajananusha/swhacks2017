@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour {
 
 	void Start () {
 		enemyInfo = new ArrayList();
+		i = 1;
 	}
 	
 
@@ -21,7 +22,8 @@ public class EnemyManager : MonoBehaviour {
 
 				enemy = Instantiate (Resources.Load ("Prefabs/Meteor"), position, Quaternion.identity) as GameObject;
 				enemyInfo.Add((Object)enemy);
-				enemy.name = "Meteor " + enemyInfo.Count;
+				enemy.name = "Meteor " + i.ToString();
+				i++;
 			} else {
 				print (enemyInfo.Count);
 
@@ -29,7 +31,8 @@ public class EnemyManager : MonoBehaviour {
 					Vector3 tempPosition = position - ((GameObject)obj).transform.position;	
 					if (tempPosition.sqrMagnitude > 16f) {
 						enemy = Instantiate (Resources.Load ("Prefabs/Meteor"), position, Quaternion.identity) as GameObject;
-						enemy.name = "Meteor " + enemyInfo.Count;
+						enemy.name = "Meteor " + i.ToString();
+						i++;
 						enemyInfo.Add ((Object)enemy);
 						break;
 					}
