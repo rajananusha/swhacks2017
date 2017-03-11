@@ -9,6 +9,7 @@ public class Laser : MonoBehaviour
 	public LineRenderer line;
 	public GameObject target;
 	public float t;
+	AudioSource audio;
 
 	// Use this for initialization
 	void Start()
@@ -21,6 +22,7 @@ public class Laser : MonoBehaviour
 		line.SetColors(Color.cyan, Color.cyan);
 		line.SetWidth(0.01f, 0.01f);
 		t = 0.0f;
+		audio = GameObject.Find ("Managers").GetComponent<AudioSource> ();
 	}
 
 	// Update is called once per frame
@@ -46,15 +48,24 @@ public class Laser : MonoBehaviour
 
 			if (extendedFingers == 5) {
 				line.enabled = true;
-				if (Physics.Raycast (transform.position, transform.forward, out hit)) {
+				Vector3 rayDirection = transform.TransformDirection(Vector3.down);
+				if (Physics.Raycast (transform.position, rayDirection, out hit)) {
 					if (hit.collider) {
 						t = 0f;
 						target = hit.transform.gameObject;
-						line.SetPosition (1, new Vector3 (0, -10, hit.distance));
+						print (target.tag);
+//						print (hit.distance);
+						line.SetPosition (1, new Vector3 (0,-hit.distance,0 ));
+
+						if (target.tag == "Enemy") {
+							print ("hgtrdxtjrgxhjtf");							
+							Destroy (target);
+							audio.Play ();
+						}
 					}
 				} else {
 					t = 0f;
-					line.SetPosition (1, new Vector3 (0, -10, /*Mathf.Lerp (0, 10000, t))*/10000));
+					line.SetPosition (1, new Vector3 (0,-1000000,0));
 				}
 			} else {
 				line.enabled = false;
