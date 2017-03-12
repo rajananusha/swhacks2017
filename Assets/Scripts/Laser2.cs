@@ -6,11 +6,13 @@ using UnityEngine.UI ;
 
 public class Laser2 : MonoBehaviour
 {
+    EnemyManager e;
 	Text scoreLabel ;
 	public LineRenderer line;
 	public GameObject target;
 	public float t;
 	AudioSource audio;
+
 	//int score ;
 	//ParticleSystem ps;
 	//bool flag;
@@ -19,7 +21,7 @@ public class Laser2 : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		
+        e = GameObject.Find("Managers").GetComponent<EnemyManager>();
 		scoreLabel = GameObject.Find ("Score Text").GetComponent<Text> ();
 		line = gameObject.GetComponent<LineRenderer>();
 		line.enabled = false;
@@ -78,8 +80,8 @@ public class Laser2 : MonoBehaviour
 							//ps = target.GetComponent<ParticleSystem>();
 							//ps.Play();
 							audio.Play ();
-							Destroy (target/*, ps.duration*/);
-                            EnemyManager e = new EnemyManager();
+							//Destroy (target/*, ps.duration*/);
+                            
                             e.updateEnemy((Object)target);
 							GameObject.Find ("Managers").GetComponent<ScoreManager> ().score++;
 
