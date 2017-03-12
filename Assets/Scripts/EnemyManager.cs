@@ -17,9 +17,9 @@ public class EnemyManager : MonoBehaviour {
 
 	void Update () {
         
-        Vector3 position = new Vector3 (Random.Range (-15, 15), Random.Range (-5, 5), Random.Range (10, 70));
+        Vector3 position = new Vector3 (Random.Range (-50, 50), Random.Range (-10, 10), Random.Range (-50, 50));
         int c = Random.Range(1, 20);
-            if (enemyInfo.Count < c) {
+            if (enemyInfo.Count < c && position.sqrMagnitude>10f) {
 			if (enemyInfo.Count == 0) {
 
 				enemy = Instantiate (Resources.Load ("Prefabs/Meteor"), position, Quaternion.identity) as GameObject;
