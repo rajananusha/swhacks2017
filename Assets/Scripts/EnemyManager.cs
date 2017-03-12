@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyManager : MonoBehaviour {
 
-	//public GameObject AstroExplosion;
+	public GameObject AstroExplosion;
 	GameObject enemy;
 	int i;
 	public static ArrayList enemyInfo = new ArrayList();
@@ -17,7 +17,7 @@ public class EnemyManager : MonoBehaviour {
 
 	void Update () {
         
-        Vector3 position = new Vector3 (Random.Range (-15, 15), Random.Range (-5, 5), Random.Range (10, 20));
+        Vector3 position = new Vector3 (Random.Range (-15, 15), Random.Range (-5, 5), Random.Range (10, 15));
         int c = Random.Range(1, 10);
             if (enemyInfo.Count < c) {
 			if (enemyInfo.Count == 0) {
@@ -27,7 +27,7 @@ public class EnemyManager : MonoBehaviour {
 				enemy.name = "Meteor " + i.ToString();
 				i++;
 			} else {
-				print (enemyInfo.Count);
+				//print (enemyInfo.Count);
 
 				foreach (Object obj in enemyInfo) {
 					Vector3 tempPosition = position - ((GameObject)obj).transform.position;	
@@ -46,9 +46,10 @@ public class EnemyManager : MonoBehaviour {
 
     public void updateEnemy(Object target)
     {
-        
-		enemyInfo.Remove(target);
-
+        //print((GameObject)target);
+        Instantiate(Resources.Load("Prefabs/AstroExplosion"), ((GameObject)target).transform.position, Quaternion.identity);
+        Destroy((GameObject)target);
+        enemyInfo.Remove(target);
     }
 	
 }
