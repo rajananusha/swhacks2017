@@ -27,9 +27,9 @@ public class Laser2 : MonoBehaviour
 		line.enabled = false;
 		line.useWorldSpace = false;
 		line.SetVertexCount (2);
-		//line.material = new Material (Shader.Find ("Particles/Additive"));
-		//line.SetColors(Color.yellow, Color.yellow);
-		//line.material.color = Color.yellow;
+//		line.material = new Material (Shader.Find ("Particles/Additive"));
+//		line.SetColors(Color.yellow, Color.yellow);
+//		line.material.color = Color.yellow;
 		line.SetWidth(0.25f, 0.25f);
 		t = 0.0f;
 		audio = GameObject.Find ("Managers").GetComponent<AudioSource> ();
