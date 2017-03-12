@@ -10,7 +10,7 @@ public class Laser2 : MonoBehaviour
 	Text scoreLabel ;
 	public LineRenderer line;
 	public GameObject target;
-	public float t;
+	//public float t;
 	AudioSource audio;
 
 	//int score ;
@@ -31,7 +31,7 @@ public class Laser2 : MonoBehaviour
 //		line.SetColors(Color.yellow, Color.yellow);
 //		line.material.color = Color.yellow;
 		line.SetWidth(0.25f, 0.25f);
-		t = 0.0f;
+		//t = 0.0f;
 		audio = GameObject.Find ("Managers").GetComponent<AudioSource> ();
 
 	}
@@ -42,9 +42,7 @@ public class Laser2 : MonoBehaviour
 	{
 		//score = GameObject.Find ("Managers").GetComponent<ScoreManager> ().score;
 
-		if (line.enabled) {
-			t += 0.5f * Time.deltaTime;
-		}
+		
 		RaycastHit hit;
 
 		Controller controller = new Controller ();
@@ -67,35 +65,46 @@ public class Laser2 : MonoBehaviour
                 }
             }
 
-			if (extendedFingers == 5) {
-				line.enabled = true;
-				Vector3 rayDirection = transform.TransformDirection(Vector3.down);
-				if (Physics.Raycast (transform.position, rayDirection, out hit)) {
-					if (hit.collider) {
-						t = 0f;
-						target = hit.transform.gameObject;
-						line.SetPosition (1, new Vector3 (0,-hit.distance,0 ));
+            if (extendedFingers == 5) {
+                try
+                {
+                    line.enabled = true;
+                }
+                catch (UnassignedReferenceException e)
+                {
+                    print("Line Enable Error");
+                }
+                Vector3 rayDirection = transform.TransformDirection(Vector3.down);
+                if (Physics.Raycast(transform.position, rayDirection, out hit)) {
+                    if (hit.collider) {
+                        //t = 0f;
+                        target = hit.transform.gameObject;
+                        line.SetPosition(1, new Vector3(0, -hit.distance, 0));
 
-						if (target.tag == "Enemy") {
-							//ps = target.GetComponent<ParticleSystem>();
-							//ps.Play();
-							audio.Play ();
-							//Destroy (target/*, ps.duration*/);
-                            
+                        if (target.tag == "Enemy") {
+                            //ps = target.GetComponent<ParticleSystem>();
+                            //ps.Play();
+                            audio.Play();
+                            //Destroy (target/*, ps.duration*/);
+
                             e.updateEnemy((Object)target);
-							GameObject.Find ("Managers").GetComponent<ScoreManager> ().score++;
+                            GameObject.Find("Managers").GetComponent<ScoreManager>().score++;
 
-							scoreLabel.text = "SCORE : " + GameObject.Find ("Managers").GetComponent<ScoreManager> ().score.ToString();
-							
-						}
-					}
-				} else {
-					t = 0f;
-					line.SetPosition (1, new Vector3 (0,-5000000,0));
-				}
-			} else {
-				line.enabled = false;
-			}
+                            scoreLabel.text = "SCORE : " + GameObject.Find("Managers").GetComponent<ScoreManager>().score.ToString();
+
+                        }
+                    }
+                } else {
+                    //t = 0f;
+                    line.SetPosition(1, new Vector3(0, -5000000, 0));
+                }
+            } else {
+                try {
+                    line.enabled = false;
+                } catch (UnassignedReferenceException e) {
+                    print("Game End");
+                }
+            }
 		}
 	}
 }

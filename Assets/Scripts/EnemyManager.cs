@@ -30,15 +30,18 @@ public class EnemyManager : MonoBehaviour {
 				//print (enemyInfo.Count);
 
 				foreach (Object obj in enemyInfo) {
-					Vector3 tempPosition = position - ((GameObject)obj).transform.position;	
-					if (tempPosition.sqrMagnitude > 16f) {
-						enemy = Instantiate (Resources.Load ("Prefabs/Meteor"), position, Quaternion.identity) as GameObject;
-						enemy.name = "Meteor " + i.ToString();
-						i++;
-						enemyInfo.Add ((Object)enemy);
-						break;
-					}
-					
+                    if ((GameObject)obj)
+                    {
+                        Vector3 tempPosition = position - ((GameObject)obj).transform.position;
+                        if (tempPosition.sqrMagnitude > 16f)
+                        {
+                            enemy = Instantiate(Resources.Load("Prefabs/Meteor"), position, Quaternion.identity) as GameObject;
+                            enemy.name = "Meteor " + i.ToString();
+                            i++;
+                            enemyInfo.Add((Object)enemy);
+                            break;
+                        }
+                    }
 				}
 			}
 		}
