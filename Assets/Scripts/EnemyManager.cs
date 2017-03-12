@@ -17,8 +17,8 @@ public class EnemyManager : MonoBehaviour {
 
 	void Update () {
         
-        Vector3 position = new Vector3 (Random.Range (-15, 15), Random.Range (-5, 5), Random.Range (10, 15));
-        int c = Random.Range(1, 10);
+        Vector3 position = new Vector3 (Random.Range (-15, 15), Random.Range (-5, 5), Random.Range (10, 70));
+        int c = Random.Range(1, 20);
             if (enemyInfo.Count < c) {
 			if (enemyInfo.Count == 0) {
 
