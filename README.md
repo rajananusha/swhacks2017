@@ -6,7 +6,7 @@ Astra is a combination of VR and Leap Motion. VR is used for head tracking and v
 
 #How to Play
 
-Download the builds folder and run the exe file. Note that you will need an HTC Vive with Leap Motion attached to the headmount inorder to play game.
+Download the Builds.zip folder, extract its contents and run the exe file. Note that you will need an HTC Vive with Leap Motion attached to the headmount inorder to play game.
 
 #Demo
 
